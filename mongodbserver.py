@@ -4,7 +4,6 @@ from pymongo import MongoClient
 from SimpleXMLRPCServer import SimpleXMLRPCServer
 import os
 import time
-port = 0
 def chpassword(x):
     os.system("echo \"changing password\"")
     os.system("sed -i 's/auth\ =\ true/auth\ =\ false/g' /etc/mongodb.conf")
