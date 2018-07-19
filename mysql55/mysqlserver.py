@@ -25,6 +25,20 @@ def start():
 def stop():
     os.system("service mysqld stop")
     return 0
+def startlog():
+    os.system("source /opt/chsql/iniset.sh && iniset -sudo /etc/my.cnf mysqld log_bin /opt/chsql/log/mysqlbin.log")
+    os.system("service mysqld restart")
+    return 0
+def stoplog():
+    os.system("source /opt/chsql/iniset.sh && iniset -sudo /etc/my.cnf mysqld log_bin ")
+    os.system("service mysqld restart")
+    return 0
+def backup():
+    os.system("service mysqld restart")
+    return 0
+def restore():
+    os.system("service mysqld restart")
+    return 0
 if __name__ == '__main__':
     sqlRpc = SimpleXMLRPCServer(('0.0.0.0', 8686))
     sqlRpc.register_function(chpassword)
@@ -32,4 +46,8 @@ if __name__ == '__main__':
     sqlRpc.register_function(restart)
     sqlRpc.register_function(start)
     sqlRpc.register_function(stop)
+    sqlRpc.register_function(startlog)
+    sqlRpc.register_function(stoplog)
+    sqlRpc.register_function(backup)
+    sqlRpc.register_function(restore)
     sqlRpc.serve_forever()

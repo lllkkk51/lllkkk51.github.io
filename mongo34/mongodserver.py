@@ -49,6 +49,20 @@ def start():
 def stop():
     os.system("service mongod stop")
     return 0
+def startlog():
+    os.system("sed -i 's/\(logAppend:\ \).*/\\1true/' /etc/mongod.conf")
+    os.system("service mongod restart")
+    return 0
+def stoplog():
+    os.system("sed -i 's/\(logAppend:\ \).*/\\1false/' /etc/mongod.conf")
+    os.system("service mongod restart")
+    return 0
+def backup():
+    os.system("service mongod restart")
+    return 0
+def restore():
+    os.system("service mongod restart")
+    return 0
 if __name__ == '__main__':
     sqlRpc = SimpleXMLRPCServer(('0.0.0.0', 8686))
     sqlRpc.register_function(chpassword)
@@ -56,5 +70,9 @@ if __name__ == '__main__':
     sqlRpc.register_function(chport)
     sqlRpc.register_function(start)
     sqlRpc.register_function(stop)
+    sqlRpc.register_function(startlog)
+    sqlRpc.register_function(stoplog)
+    sqlRpc.register_function(backup)
+    sqlRpc.register_function(restore)
     sqlRpc.serve_forever()
 

@@ -1,0 +1,4 @@
+os.system("su - root -l -c \"sed -i \\\"s/\\(archive_command\\ =\\).*/\\1\\ 'cp\\ %p\\ \\/opt\\/chsql\\/log'/g\\\" test\"")
+os.system("su - root -l -c \"sed -i \\\"s/\\(archive_command\\ =\\).*/\\1\\ 'cp\\ %p\\ \\/opt\\/chsql\\/log\\/%f'/g\\\" /var/lib/pgsql/9.3/data/postgresql.conf\"")
+su - root -l -c "sed -i \"s/\(archive_command\ =\).*/\1\ 'cp\ %p\ \/opt\/chsql\/log'/g\" test"
+sed -i "s/\(archive_command\ =\).*/\1\ 'cp\ %p\ \/opt\/chsql\/log'/g" test
